@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tictactoe/Home/Homepage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: MyHomePage(),
     );
   }
 }
@@ -25,10 +26,92 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static var omyFont = GoogleFonts.pressStart2P(
+      textStyle:
+          TextStyle(color: Colors.black, letterSpacing: 3, fontSize: 12));
+  static var myFontWhite = GoogleFonts.pressStart2P(
+      textStyle: TextStyle(color: Colors.white, letterSpacing: 3));
+  TextEditingController numsize = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      backgroundColor: Colors.grey[900],
+      body: ListView(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 120.0),
+                  child: Container(
+                    child: Text(
+                      'TIC TAC TOE',
+                      style: myFontWhite.copyWith(fontSize: 25.0),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: Container(
+                    child: Image.asset('lib/images/xoWhite.png'),
+                    height: 150.0,
+                    width: 150.0,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: Container(
+                    child: Text(
+                      'TABLE SIZE',
+                      style: myFontWhite.copyWith(fontSize: 15.0),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    padding:
+                        EdgeInsets.only(top: 10.0, left: 50.0, right: 50.0),
+                    child: TextField(
+                      style: myFontWhite.copyWith(fontSize: 15.0),
+                      controller: numsize,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        // labelText: '',
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Home(numsize: numsize.text)),
+                    );
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 40.0, bottom: 30.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(25.0),
+                      child: Container(
+                        padding: EdgeInsets.all(30.0),
+                        color: Colors.white,
+                        child: Text(
+                          'PLAY GAME',
+                          style: myFontWhite.copyWith(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
