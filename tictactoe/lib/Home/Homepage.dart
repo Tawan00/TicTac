@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatefulWidget {
-  String numsize;
+  int numsize;
   Home({this.numsize});
   @override
   _HomeState createState() => _HomeState();
@@ -10,7 +10,22 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool ohTurn = true;
-  List<String> display = ['', '', '', '', '', '', '', '', ''];
+  int xoSize;
+  List<String> display = [];
+  //List<String> display = ['', '', '', '', '', '', '', '', ''];
+  @override
+  void initState() {
+    super.initState();
+    xoSize = widget.numsize * widget.numsize;
+    for (int i = 0; i < xoSize; i++) {
+      // display = [i.toString()];
+      // print(display);
+      display.add(i.toString());
+    }
+
+    print(display);
+    // print(display1);
+  }
 
   static var omyFont = GoogleFonts.pressStart2P(
       textStyle:
@@ -50,49 +65,47 @@ class _HomeState extends State<Home> {
           // SizedBox(
           //   height: 15.0,
           // ),
-          Expanded(
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Player O', style: myFontWhite),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(oScore.toString(), style: omyFont),
-                      ],
-                    ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Player O', style: myFontWhite),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(oScore.toString(), style: omyFont),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Player X', style: myFontWhite),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(xScore.toString(), style: omyFont),
-                      ],
-                    ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Player X', style: myFontWhite),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(xScore.toString(), style: omyFont),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: widget.numsize,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
               child: GridView.builder(
-                itemCount: 9,
+                itemCount: display.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
+                    crossAxisCount: widget.numsize),
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
@@ -105,7 +118,7 @@ class _HomeState extends State<Home> {
                       child: Center(
                         child: Text(
                           display[index],
-                          //index.toString(),
+                          // index.toString(),
                           style: TextStyle(color: Colors.white, fontSize: 40),
                         ),
                       ),
@@ -115,34 +128,23 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          Expanded(
-            child: Container(
-              child: Center(
-                child: Column(
-                  children: [
-                    Text(
-                      'TIC TAC TOE',
-                      style: myFontWhite,
-                    ),
-                    Text(
-                      this.widget.numsize,
-                      style: myFontWhite,
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    FlatButton(
-                      onPressed: () {
-                        _showDrawDialog();
-                      },
-                      child: Text(
-                        'HISTORY PLAY!',
-                        style: omyFont,
-                      ),
-                    ),
-                  ],
+          Container(
+            child: Column(
+              children: [
+                Text(
+                  'TIC TAC TOE',
+                  style: myFontWhite,
                 ),
-              ),
+                FlatButton(
+                  onPressed: () {
+                    _showDrawDialog();
+                  },
+                  child: Text(
+                    'HISTORY PLAY!',
+                    style: omyFont,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

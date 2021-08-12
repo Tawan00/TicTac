@@ -86,11 +86,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Home(numsize: numsize.text)),
-                    );
+                    if (numsize.text != "") {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Home(numsize: int.parse((numsize.text)))),
+                      );
+                    } else if (numsize.text == "") {
+                      _InputDialog();
+                    }
                   },
                   child: Padding(
                     padding: EdgeInsets.only(top: 40.0, bottom: 30.0),
@@ -113,5 +118,27 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+
+  void _InputDialog() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext) {
+          return AlertDialog(
+            title: Text('YOU NOT INPUT TABLE SIZE!!!'),
+            actions: [
+              FlatButton(
+                child: Text(
+                  'OK',
+                  style: TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          );
+        });
   }
 }
