@@ -13,18 +13,23 @@ class _HomeState extends State<Home> {
   int xoSize;
   String display1 = '';
   List<String> display = [];
+
   //List<String> display = ['', '', '', '', '', '', '', '', ''];
   @override
   void initState() {
     super.initState();
     xoSize = widget.numsize * widget.numsize;
-    for (int i = 0; i < xoSize; i++) {
-      // display = [i.toString()];
-      // print(display);
-      display.add(display1);
+    var twoDList = List.generate(widget.numsize, (i) => List(widget.numsize),
+        growable: false);
+    for (int i = 0; i < widget.numsize; i++) {
+      for (int j = 0; j < widget.numsize; j++) {
+        twoDList[i][j] = '';
+        display.add(twoDList[i][j]);
+      }
     }
 
     print(display);
+    print(twoDList);
     // print(display1);
   }
 
@@ -121,7 +126,7 @@ class _HomeState extends State<Home> {
                       child: Center(
                         child: Text(
                           display[index],
-                          // index.toString(),
+                          //index.toString(),
                           style: TextStyle(color: Colors.white, fontSize: 40),
                         ),
                       ),
@@ -171,39 +176,132 @@ class _HomeState extends State<Home> {
 
   void _checkWinner() {
     for (int i = 0; i < display.length; i++) {
-      if (i == 0 || i == 3 || i == 6 || i == 9 || i == 12) {
-        if (display[i] != '' &&
-            display[i] == display[i + 1] &&
-            display[i + 2] == display[i + 1]) {
-          _showWinDialog(display[i]);
+      ///////////3*3
+      if (this.widget.numsize == 3) {
+        if (i == 0 || i == 3 || i == 6) {
+          if (display[i] != '' &&
+              display[i] == display[i + 1] &&
+              display[i + 2] == display[i + 1]) {
+            _showWinDialog(display[i]);
+          }
+        }
+        if (i == 0 || i == 1 || i == 2) {
+          if (display[i] != '' &&
+              display[i] == display[i + this.widget.numsize] &&
+              display[i + this.widget.numsize] ==
+                  display[i + (this.widget.numsize + this.widget.numsize)]) {
+            _showWinDialog(display[i]);
+          }
+        }
+        if (i == 0 || i == 2) {
+          if (display[i] != '' &&
+              display[i] == display[i + this.widget.numsize + 1] &&
+              display[i + this.widget.numsize + 1] ==
+                  display[
+                      (this.widget.numsize + 1) + (this.widget.numsize + 1)]) {
+            _showWinDialog(display[i]);
+          }
+          if (display[i] != '' &&
+              display[i] == display[i + this.widget.numsize - 1] &&
+              display[i + this.widget.numsize - 1] ==
+                  display[i +
+                      (this.widget.numsize - 1) +
+                      (this.widget.numsize - 1)]) {
+            _showWinDialog(display[i]);
+          }
         }
       }
-      if (i == 0 || i == 1 || i == 2) {
-        if (display[i] != '' &&
-            display[i] == display[i + this.widget.numsize] &&
-            display[i + this.widget.numsize] ==
-                display[i + (this.widget.numsize + this.widget.numsize)]) {
-          _showWinDialog(display[i]);
+
+////////////// 4*4
+      if (this.widget.numsize == 4) {
+        if (i == 0 || i == 4 || i == 8 || i == 12) {
+          if (display[i] != '' &&
+              display[i] == display[i + 1] && /////////แนวนอน
+              display[i + 1] == display[i + 2] &&
+              display[i + 2] == display[i + 3]) {
+            _showWinDialog(display[i]);
+          }
+        }
+
+        if (i == 0 || i == 1 || i == 2 || i == 3) {
+          if (display[i] != '' &&
+              display[i] == display[i + this.widget.numsize] &&
+              display[i + this.widget.numsize] ==
+                  display[i + (this.widget.numsize * 2)] && /////แนวตั้ง
+              display[i + (this.widget.numsize * 2)] ==
+                  display[i + (this.widget.numsize * 3)]) {
+            _showWinDialog(display[i]);
+          }
+        }
+        if (i == 0 || i == 3) {
+          if (display[i] != '' &&
+              display[i] == display[i + this.widget.numsize + 1] &&
+              display[i + this.widget.numsize + 1] ==
+                  display[(this.widget.numsize + 1) * 2] &&
+              display[(this.widget.numsize + 1) * 2] ==
+                  display[(this.widget.numsize + 1) * 3]) {
+            _showWinDialog(display[i]); ////แนวทะแยง
+          }
+          if (display[i] != '' &&
+              display[i] == display[i + this.widget.numsize - 1] &&
+              display[i + this.widget.numsize - 1] ==
+                  display[i + (this.widget.numsize - 1) * 2] &&
+              display[i + (this.widget.numsize - 1) * 2] ==
+                  display[i + (this.widget.numsize - 1) * 3]) {
+            _showWinDialog(display[i]);
+          }
         }
       }
-      if (i == 0 || i == 2) {
-        if (display[i] != '' &&
-            display[i] == display[i + this.widget.numsize + 1] &&
-            display[i + this.widget.numsize + 1] ==
-                display[
-                    (this.widget.numsize + 1) + (this.widget.numsize + 1)]) {
-          _showWinDialog(display[i]);
+      ////////////// 5*5
+      if (this.widget.numsize == 5) {
+        if (i == 0 || i == 5 || i == 10 || i == 15 || i == 20) {
+          if (display[i] != '' &&
+              display[i] == display[i + 1] && /////////แนวนอน
+              display[i + 1] == display[i + 2] &&
+              display[i + 2] == display[i + 3] &&
+              display[i + 3] == display[i + 4]) {
+            _showWinDialog(display[i]);
+          }
         }
-        if (display[i] != '' &&
-            display[i] == display[i + this.widget.numsize - 1] &&
-            display[i + this.widget.numsize - 1] ==
-                display[i +
-                    (this.widget.numsize - 1) +
-                    (this.widget.numsize - 1)]) {
-          _showWinDialog(display[i]);
+
+        if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4) {
+          if (display[i] != '' &&
+              display[i] == display[i + this.widget.numsize] &&
+              display[i + this.widget.numsize] ==
+                  display[i + (this.widget.numsize * 2)] && /////แนวตั้ง
+              display[i + (this.widget.numsize * 2)] ==
+                  display[i + (this.widget.numsize * 3)] &&
+              display[i + (this.widget.numsize * 3)] ==
+                  display[i + (this.widget.numsize * 4)]) {
+            _showWinDialog(display[i]);
+          }
+        }
+        if (i == 0 || i == 4) {
+          if (display[i] != '' &&
+              display[i] == display[i + this.widget.numsize + 1] &&
+              display[i + this.widget.numsize + 1] ==
+                  display[(this.widget.numsize + 1) * 2] &&
+              display[(this.widget.numsize + 1) * 2] ==
+                  display[(this.widget.numsize + 1) * 3] &&
+              display[(this.widget.numsize + 1) * 3] ==
+                  display[(this.widget.numsize + 1) * 4]) {
+            _showWinDialog(display[i]); ////แนวทะแยง
+          }
+          if (display[i] != '' &&
+              display[i] == display[i + this.widget.numsize - 1] &&
+              display[i + this.widget.numsize - 1] ==
+                  display[i + (this.widget.numsize - 1) * 2] &&
+              display[i + (this.widget.numsize - 1) * 2] ==
+                  display[i + (this.widget.numsize - 1) * 3] &&
+              display[i + (this.widget.numsize - 1) * 3] ==
+                  display[i + (this.widget.numsize - 1) * 4]) {
+            _showWinDialog(display[i]);
+          }
         }
       }
     }
+
+////////////Draw
     if (filledBoxes == display.length) {
       _showDrawDialog();
     }
