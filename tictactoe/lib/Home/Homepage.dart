@@ -171,10 +171,6 @@ class _HomeState extends State<Home> {
 
   void _checkWinner() {
     for (int i = 0; i < display.length; i++) {
-      // if (i > display.length) {
-      //   i = 0;
-      //   break;
-      // }
       if (i == 0 || i == 3 || i == 6 || i == 9 || i == 12) {
         if (display[i] != '' &&
             display[i] == display[i + 1] &&
@@ -182,207 +178,35 @@ class _HomeState extends State<Home> {
           _showWinDialog(display[i]);
         }
       }
-      // else {
-      //   if (display[i] != '' &&
-      //       display[i] == display[display.length - 1] &&
-      //       display[i] == display[i - 1]) {
-      //     _showWinDialog(display[i]);
-      //   }
-      // }
-
-      // if (display[i] != '' &&
-      //     display[i] == display[i + 1] &&
-      //     display[i] == display[i - 1]) {
-      //   _showWinDialog(display[i]);
-      // }
-
-      // if (display[i] != '' &&
-      //     display[i] == display[i + this.widget.numsize] &&
-      //     display[i] == display[i - this.widget.numsize]) {
-      //   _showWinDialog(display[i]);
-      // }
-      // if (display[i] != '' &&
-      //     display[i] == display[i + (this.widget.numsize + 1)] &&
-      //     display[i] == display[i - (this.widget.numsize - 1)]) {
-      //   _showWinDialog(display[i]);
-      // }
-
+      if (i == 0 || i == 1 || i == 2) {
+        if (display[i] != '' &&
+            display[i] == display[i + this.widget.numsize] &&
+            display[i + this.widget.numsize] ==
+                display[i + (this.widget.numsize + this.widget.numsize)]) {
+          _showWinDialog(display[i]);
+        }
+      }
+      if (i == 0 || i == 2) {
+        if (display[i] != '' &&
+            display[i] == display[i + this.widget.numsize + 1] &&
+            display[i + this.widget.numsize + 1] ==
+                display[
+                    (this.widget.numsize + 1) + (this.widget.numsize + 1)]) {
+          _showWinDialog(display[i]);
+        }
+        if (display[i] != '' &&
+            display[i] == display[i + this.widget.numsize - 1] &&
+            display[i + this.widget.numsize - 1] ==
+                display[i +
+                    (this.widget.numsize - 1) +
+                    (this.widget.numsize - 1)]) {
+          _showWinDialog(display[i]);
+        }
+      }
     }
     if (filledBoxes == display.length) {
       _showDrawDialog();
     }
-
-    // if (this.widget.numsize == 3) {
-    //   if (display[0] == display[1] &&
-    //       display[0] == display[2] &&
-    //       display[0] != '') {
-    //     _showWinDialog(display[0]);
-    //   }
-    //   if (display[3] == display[4] &&
-    //       display[3] == display[5] &&
-    //       display[3] != '') {
-    //     _showWinDialog(display[3]);
-    //   }
-    //   if (display[6] == display[7] &&
-    //       display[6] == display[8] &&
-    //       display[6] != '') {
-    //     _showWinDialog(display[6]);
-    //   }
-    //   if (display[0] == display[3] &&
-    //       display[0] == display[6] &&
-    //       display[0] != '') {
-    //     _showWinDialog(display[0]);
-    //   }
-    //   if (display[1] == display[4] &&
-    //       display[1] == display[7] &&
-    //       display[1] != '') {
-    //     _showWinDialog(display[1]);
-    //   }
-    //   if (display[2] == display[5] &&
-    //       display[2] == display[8] &&
-    //       display[2] != '') {
-    //     _showWinDialog(display[2]);
-    //   }
-    //   if (display[6] == display[4] &&
-    //       display[6] == display[2] &&
-    //       display[6] != '') {
-    //     _showWinDialog(display[6]);
-    //   }
-    //   if (display[0] == display[4] &&
-    //       display[0] == display[8] &&
-    //       display[0] != '') {
-    //     _showWinDialog(display[0]);
-    //   } else if (filledBoxes == 9) {
-    //     _showDrawDialog();
-    //   }
-    // } else if (this.widget.numsize == 4) {
-    //   if (display[0] == display[1] &&
-    //       display[0] == display[2] &&
-    //       display[0] == display[3] &&
-    //       display[0] != '') {
-    //     _showWinDialog(display[0]);
-    //   }
-    //   if (display[4] == display[5] &&
-    //       display[4] == display[6] &&
-    //       display[4] == display[7] &&
-    //       display[4] != '') {
-    //     _showWinDialog(display[4]);
-    //   }
-    //   if (display[8] == display[9] &&
-    //       display[8] == display[10] &&
-    //       display[8] == display[11] &&
-    //       display[8] != '') {
-    //     _showWinDialog(display[8]);
-    //   }
-    //   if (display[12] == display[13] &&
-    //       display[12] == display[14] &&
-    //       display[12] == display[15] &&
-    //       display[12] != '') {
-    //     _showWinDialog(display[12]);
-    //   }
-    //   if (display[0] == display[4] &&
-    //       display[0] == display[8] &&
-    //       display[0] == display[12] &&
-    //       display[0] != '') {
-    //     _showWinDialog(display[0]);
-    //   }
-    //   if (display[1] == display[5] &&
-    //       display[1] == display[9] &&
-    //       display[1] == display[13] &&
-    //       display[1] != '') {
-    //     _showWinDialog(display[1]);
-    //   }
-    //   if (display[2] == display[6] &&
-    //       display[2] == display[10] &&
-    //       display[2] == display[14] &&
-    //       display[2] != '') {
-    //     _showWinDialog(display[2]);
-    //   }
-    //   if (display[3] == display[7] &&
-    //       display[3] == display[11] &&
-    //       display[3] == display[15] &&
-    //       display[3] != '') {
-    //     _showWinDialog(display[3]);
-    //   }
-    //   if (display[0] == display[5] &&
-    //       display[0] == display[10] &&
-    //       display[0] == display[15] &&
-    //       display[0] != '') {
-    //     _showWinDialog(display[0]);
-    //   }
-    //   if (display[3] == display[6] &&
-    //       display[3] == display[9] &&
-    //       display[3] == display[12] &&
-    //       display[3] != '') {
-    //     _showWinDialog(display[3]);
-    //   } else if (filledBoxes == 16) {
-    //     _showDrawDialog();
-    //   }
-    // } else if (this.widget.numsize == 5) {
-    //   if (display[0] == display[1] &&
-    //       display[0] == display[2] &&
-    //       display[0] == display[3] &&
-    //       display[0] == display[4] &&
-    //       display[0] != '') {
-    //     _showWinDialog(display[0]);
-    //   }
-    //   if (display[4] == display[5] &&
-    //       display[4] == display[6] &&
-    //       display[4] == display[7] &&
-    //       display[4] != '') {
-    //     _showWinDialog(display[4]);
-    //   }
-    //   if (display[8] == display[9] &&
-    //       display[8] == display[10] &&
-    //       display[8] == display[11] &&
-    //       display[8] != '') {
-    //     _showWinDialog(display[8]);
-    //   }
-    //   if (display[12] == display[13] &&
-    //       display[12] == display[14] &&
-    //       display[12] == display[15] &&
-    //       display[12] != '') {
-    //     _showWinDialog(display[12]);
-    //   }
-    //   if (display[0] == display[4] &&
-    //       display[0] == display[8] &&
-    //       display[0] == display[12] &&
-    //       display[0] != '') {
-    //     _showWinDialog(display[0]);
-    //   }
-    //   if (display[1] == display[5] &&
-    //       display[1] == display[9] &&
-    //       display[1] == display[13] &&
-    //       display[1] != '') {
-    //     _showWinDialog(display[1]);
-    //   }
-    //   if (display[2] == display[6] &&
-    //       display[2] == display[10] &&
-    //       display[2] == display[14] &&
-    //       display[2] != '') {
-    //     _showWinDialog(display[2]);
-    //   }
-    //   if (display[3] == display[7] &&
-    //       display[3] == display[11] &&
-    //       display[3] == display[15] &&
-    //       display[3] != '') {
-    //     _showWinDialog(display[3]);
-    //   }
-    //   if (display[0] == display[5] &&
-    //       display[0] == display[10] &&
-    //       display[0] == display[15] &&
-    //       display[0] != '') {
-    //     _showWinDialog(display[0]);
-    //   }
-    //   if (display[3] == display[6] &&
-    //       display[3] == display[9] &&
-    //       display[3] == display[12] &&
-    //       display[3] != '') {
-    //     _showWinDialog(display[3]);
-    //   } else if (filledBoxes == 25) {
-    //     _showDrawDialog();
-    //   }
-    // }
   }
 
   void _showDrawDialog() {
