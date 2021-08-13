@@ -26,12 +26,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int Selectvalue;
+  List<int> listItem = [3, 4, 5, 6, 7, 8];
   static var omyFont = GoogleFonts.pressStart2P(
       textStyle:
           TextStyle(color: Colors.black, letterSpacing: 3, fontSize: 12));
-  static var myFontWhite = GoogleFonts.pressStart2P(
+  static var FontWhite = GoogleFonts.pressStart2P(
       textStyle: TextStyle(color: Colors.white, letterSpacing: 3));
-  TextEditingController numsize = TextEditingController();
+  static var ogFont = GoogleFonts.pressStart2P(
+      textStyle:
+          TextStyle(color: Colors.orange, letterSpacing: 3, fontSize: 12));
+  TextEditingController tablesize = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +52,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: EdgeInsets.only(top: 120.0),
                   child: Container(
                     child: Text(
+                      'GAME',
+                      style: ogFont.copyWith(fontSize: 25.0),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Container(
+                    child: Text(
                       'TIC TAC TOE',
-                      style: myFontWhite.copyWith(fontSize: 25.0),
+                      style: FontWhite.copyWith(fontSize: 25.0),
                     ),
                   ),
                 ),
@@ -65,48 +79,70 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Container(
                     child: Text(
                       'TABLE SIZE',
-                      style: myFontWhite.copyWith(fontSize: 15.0),
+                      style: FontWhite.copyWith(fontSize: 15.0),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.only(
+                      top: 16.0, bottom: 16.0, right: 50, left: 50),
                   child: Container(
-                    padding:
-                        EdgeInsets.only(top: 10.0, left: 50.0, right: 50.0),
-                    child: TextField(
-                      style: myFontWhite.copyWith(fontSize: 15.0),
-                      controller: numsize,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        // labelText: '',
+                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 1),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: DropdownButton(
+                      hint: Text('SELECT SIZE TABLE',
+                          style: FontWhite.copyWith(
+                              color: Colors.white, fontSize: 7.0)),
+                      dropdownColor: Colors.grey[600],
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.white,
                       ),
+                      iconSize: 36,
+                      isExpanded: true,
+                      underline: SizedBox(),
+                      style: omyFont.copyWith(color: Colors.white),
+                      value: Selectvalue,
+                      onChanged: (newValue) {
+                        setState(() {
+                          Selectvalue = newValue;
+                          tablesize.text = newValue.toString();
+                        });
+                      },
+                      items: listItem.map((valueItem) {
+                        return DropdownMenuItem(
+                          value: valueItem,
+                          child: Text(valueItem.toString()),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (numsize.text != "") {
+                    if (tablesize.text != "") {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                Home(numsize: int.parse((numsize.text)))),
+                                Home(numsize: int.parse((tablesize.text)))),
                       );
-                    } else if (numsize.text == "") {
+                    } else if (tablesize.text == "") {
                       _InputDialog();
                     }
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(top: 40.0, bottom: 30.0),
+                    padding: EdgeInsets.only(top: 30.0, bottom: 30.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(25.0),
                       child: Container(
                         padding: EdgeInsets.all(30.0),
                         color: Colors.white,
                         child: Text(
-                          'PLAY GAME',
-                          style: myFontWhite.copyWith(color: Colors.black),
+                          'PLAY',
+                          style: FontWhite.copyWith(color: Colors.black),
                         ),
                       ),
                     ),

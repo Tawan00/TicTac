@@ -19,17 +19,13 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     xoSize = widget.numsize * widget.numsize;
-    var twoDList = List.generate(widget.numsize, (i) => List(widget.numsize),
-        growable: false);
-    for (int i = 0; i < widget.numsize; i++) {
-      for (int j = 0; j < widget.numsize; j++) {
-        twoDList[i][j] = '';
-        display.add(twoDList[i][j]);
-      }
+    for (int i = 0; i < xoSize; i++) {
+      // display = [i.toString()];
+      // print(display);
+      display.add(display1);
     }
 
     print(display);
-    print(twoDList);
     // print(display1);
   }
 
@@ -42,6 +38,8 @@ class _HomeState extends State<Home> {
 
   int oScore = 0;
   int xScore = 0;
+  int oCount = 0;
+  int xCount = 0;
   int filledBoxes = 0;
 
   @override
@@ -59,10 +57,6 @@ class _HomeState extends State<Home> {
           ),
           onPressed: () {
             Navigator.pop(context);
-            // Navigator.of(context).push(MaterialPageRoute(
-            //     builder: (context) => HomePage(
-            //           username: this.widget.username,
-            //         )));
           },
         ),
       ),
@@ -116,8 +110,8 @@ class _HomeState extends State<Home> {
                   return GestureDetector(
                     onTap: () {
                       _tapped(index);
-                      print(index);
-                      print(display.length);
+                      // print(index);
+                      // print(display.length);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -140,7 +134,7 @@ class _HomeState extends State<Home> {
             child: Column(
               children: [
                 Text(
-                  'TIC TAC TOE',
+                  '${widget.numsize} x ${widget.numsize}',
                   style: myFontWhite,
                 ),
                 FlatButton(
@@ -173,6 +167,35 @@ class _HomeState extends State<Home> {
       _checkWinner();
     });
   }
+
+  // void _checkWinner2() {
+  //   int x = 0;
+  //   List<int> addOX = [];
+  //   for (int i = 0; i < display.length; i++) {
+  //     if (display[i] == 'o') {
+  //       oCount += 1;
+  //       xCount = 0;
+  //       if (oCount == widget.numsize) {
+  //         _showWinDialog(display[i]);
+  //         oCount = 0;
+  //         print('O WIN');
+  //         addOX.add(i);
+  //         break;
+  //       }
+  //     }
+  //     if (display[i] == 'x') {
+  //       xCount += 1;
+  //       oCount = 0;
+  //       if (xCount == widget.numsize) {
+  //         _showWinDialog(display[i]);
+  //         xCount = 0;
+  //         print('X WIN');
+  //         addOX.add(i);
+  //         break;
+  //       }
+  //     }
+  //   }
+  // }
 
   void _checkWinner() {
     for (int i = 0; i < display.length; i++) {
@@ -212,7 +235,7 @@ class _HomeState extends State<Home> {
         }
       }
 
-////////////// 4*4
+//////////// 4*4
       if (this.widget.numsize == 4) {
         if (i == 0 || i == 4 || i == 8 || i == 12) {
           if (display[i] != '' &&
@@ -252,7 +275,7 @@ class _HomeState extends State<Home> {
           }
         }
       }
-      ////////////// 5*5
+      //////////// 5*5
       if (this.widget.numsize == 5) {
         if (i == 0 || i == 5 || i == 10 || i == 15 || i == 20) {
           if (display[i] != '' &&
@@ -360,5 +383,7 @@ class _HomeState extends State<Home> {
       }
     });
     filledBoxes = 0;
+    xCount = 0;
+    oCount = 0;
   }
 }
