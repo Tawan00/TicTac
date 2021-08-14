@@ -25,4 +25,9 @@ class DBService {
     var connection = await database;
     return await connection.insert(tableName, data);
   }
+
+  deleteData(historyId) async {
+    var connection = await database;
+    return await connection.delete(tableName);
+  }
 }

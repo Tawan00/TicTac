@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tictactoe/database/db_service.dart';
 import 'package:tictactoe/model/history_Model.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 class historyPlay extends StatefulWidget {
   @override
@@ -37,19 +39,19 @@ class _historyPlayState extends State<historyPlay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Colors.teal[50],
         elevation: 0,
         centerTitle: true,
         title: Text(
           'HISTORY PLAY',
-          style: FontWhite.copyWith(color: Colors.white),
+          style: FontWhite.copyWith(color: Colors.black),
         ),
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
+            CupertinoIcons.arrowtriangle_left_fill,
+            color: Colors.grey,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -58,27 +60,81 @@ class _historyPlayState extends State<historyPlay> {
       ),
       body: Padding(
         padding:
-            const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+            const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 45),
         child: ListView.builder(
             itemCount: historyList.length,
             itemBuilder: (BuildContext buildContext, int index) {
               return Card(
+                color: Colors.cyanAccent[100],
                 child: ListTile(
-                  leading: Text(
-                    historyList[index].id.toString(),
-                    style: FontWhite,
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "MATCH " + historyList[index].id.toString(),
+                        style: FontWhite,
+                      ),
+                    ],
                   ),
-                  title: Text(
-                    historyList[index].list,
-                    style: FontWhite,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        historyList[index].list,
+                        style: FontWhite,
+                      ),
+                    ],
                   ),
-                  subtitle: Text(
-                    historyList[index].result,
-                    style: FontWhite.copyWith(color: Colors.orange),
+                  subtitle: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        historyList[index].result,
+                        style: FontWhite.copyWith(
+                            color: Colors.orange, fontSize: 13),
+                      ),
+                    ],
                   ),
                 ),
               );
             }),
+      ),
+      floatingActionButton: SizedBox.fromSize(
+        size: Size.square(80),
+        child: FloatingActionButton(
+          onPressed: () async {
+            var service = DBService();
+            var result = await service.deleteData(historyList);
+            getAllData();
+            setState(() {});
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (context) => historyPlay()));
+            Navigator.pop(context);
+          },
+          child: Icon(
+            CupertinoIcons.trash,
+            size: 40.0,
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.redAccent,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 15.0,
+        color: Colors.transparent,
+        elevation: 25.0,
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          height: 70.0,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(80.0),
+                topRight: Radius.circular(80.0),
+              ),
+              color: Colors.greenAccent),
+        ),
       ),
     );
   }

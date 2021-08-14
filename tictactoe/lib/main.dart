@@ -1,6 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tictactoe/Home/Homepage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:tictactoe/Home/historyplay.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
       textStyle:
           TextStyle(color: Colors.black, letterSpacing: 3, fontSize: 12));
   static var FontWhite = GoogleFonts.pressStart2P(
-      textStyle: TextStyle(color: Colors.white, letterSpacing: 3));
+      textStyle: TextStyle(color: Colors.black, letterSpacing: 3));
   static var ogFont = GoogleFonts.pressStart2P(
       textStyle:
           TextStyle(color: Colors.orange, letterSpacing: 3, fontSize: 12));
@@ -41,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.teal[50],
       body: ListView(
         children: [
           Center(
@@ -69,13 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 50.0),
                   child: Container(
-                    child: Image.asset('lib/images/xoWhite.png'),
+                    child: Image.asset('lib/images/xoBlack.png'),
                     height: 150.0,
                     width: 150.0,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 50.0),
+                  padding: const EdgeInsets.only(top: 50.0, bottom: 20),
                   child: Container(
                     child: Text(
                       'TABLE SIZE',
@@ -89,21 +93,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.0, right: 16.0),
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 1),
+                        border: Border.all(color: Colors.black, width: 1),
                         borderRadius: BorderRadius.circular(15)),
                     child: DropdownButton(
                       hint: Text('SELECT SIZE TABLE',
                           style: FontWhite.copyWith(
-                              color: Colors.white, fontSize: 7.0)),
-                      dropdownColor: Colors.grey[600],
+                              color: Colors.black, fontSize: 7.0)),
+                      dropdownColor: Colors.white,
                       icon: Icon(
                         Icons.arrow_drop_down,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       iconSize: 36,
                       isExpanded: true,
                       underline: SizedBox(),
-                      style: omyFont.copyWith(color: Colors.white),
+                      style: omyFont.copyWith(color: Colors.black),
                       value: Selectvalue,
                       onChanged: (newValue) {
                         setState(() {
@@ -120,38 +124,50 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    if (tablesize.text != "") {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Home(tablesize: int.parse((tablesize.text)))),
-                      );
-                    } else if (tablesize.text == "") {
-                      _InputDialog();
-                    }
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 30.0, bottom: 30.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25.0),
-                      child: Container(
-                        padding: EdgeInsets.all(30.0),
-                        color: Colors.white,
-                        child: Text(
-                          'PLAY',
-                          style: FontWhite.copyWith(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
         ],
+      ),
+      floatingActionButton: SizedBox.fromSize(
+        size: Size.square(80),
+        child: FloatingActionButton(
+          onPressed: () {
+            if (tablesize.text != "") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        Home(tablesize: int.parse((tablesize.text)))),
+              );
+            } else if (tablesize.text == "") {
+              _InputDialog();
+            }
+          },
+          child: Icon(
+            CupertinoIcons.game_controller,
+            size: 40.0,
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.green[400],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 15.0,
+        color: Colors.transparent,
+        elevation: 25.0,
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          height: 70.0,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(80.0),
+                topRight: Radius.circular(80.0),
+              ),
+              color: Colors.greenAccent),
+        ),
       ),
     );
   }

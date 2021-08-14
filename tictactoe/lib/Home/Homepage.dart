@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tictactoe/Home/historyplay.dart';
 import 'package:tictactoe/database/db_service.dart';
 import 'package:tictactoe/model/history_Model.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 class Home extends StatefulWidget {
   int tablesize;
@@ -48,15 +50,15 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Colors.teal[50],
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
+            CupertinoIcons.arrowtriangle_left_fill,
+            color: Colors.grey,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -77,11 +79,14 @@ class _HomeState extends State<Home> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Player O', style: myFontWhite),
+                      Text('Player O',
+                          style: omyFont.copyWith(color: Colors.black)),
                       SizedBox(
                         height: 10,
                       ),
-                      Text(oScore.toString(), style: omyFont),
+                      Text(oScore.toString(),
+                          style: omyFont.copyWith(
+                              color: Colors.black, fontSize: 15)),
                     ],
                   ),
                 ),
@@ -90,11 +95,14 @@ class _HomeState extends State<Home> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Player X', style: myFontWhite),
+                      Text('Player X',
+                          style: omyFont.copyWith(color: Colors.black)),
                       SizedBox(
                         height: 10,
                       ),
-                      Text(xScore.toString(), style: omyFont),
+                      Text(xScore.toString(),
+                          style: omyFont.copyWith(
+                              color: Colors.black, fontSize: 15)),
                     ],
                   ),
                 ),
@@ -118,13 +126,13 @@ class _HomeState extends State<Home> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white),
+                        border: Border.all(color: Colors.grey),
                       ),
                       child: Center(
                         child: Text(
                           display[index],
                           // index.toString(),
-                          style: TextStyle(color: Colors.white, fontSize: 40),
+                          style: TextStyle(color: Colors.black, fontSize: 40),
                         ),
                       ),
                     ),
@@ -133,27 +141,39 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          Container(
-            child: Column(
-              children: [
-                Text(
-                  '${widget.tablesize} x ${widget.tablesize}',
-                  style: myFontWhite,
-                ),
-                FlatButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => historyPlay()));
-                  },
-                  child: Text(
-                    'HISTORY PLAY!',
-                    style: omyFont,
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
+      ),
+      floatingActionButton: SizedBox.fromSize(
+        size: Size.square(80),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => historyPlay()));
+          },
+          child: Icon(
+            CupertinoIcons.doc_text_search,
+            size: 40.0,
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.green[400],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 15.0,
+        color: Colors.transparent,
+        elevation: 25.0,
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          height: 70.0,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(80.0),
+                topRight: Radius.circular(80.0),
+              ),
+              color: Colors.greenAccent),
+        ),
       ),
     );
   }
@@ -206,298 +226,298 @@ class _HomeState extends State<Home> {
         }
       }
 
-// //////////// 4*4
-//       if (this.widget.tablesize == 4) {
-//         if (i == 0 || i == 4 || i == 8 || i == 12) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + 1] &&
-//               display[i + 1] == display[i + 2] &&
-//               display[i + 2] == display[i + 3]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
+//////////// 4*4
+      if (this.widget.tablesize == 4) {
+        if (i == 0 || i == 4 || i == 8 || i == 12) {
+          if (display[i] != '' &&
+              display[i] == display[i + 1] &&
+              display[i + 1] == display[i + 2] &&
+              display[i + 2] == display[i + 3]) {
+            _showWinDialog(display[i]);
+          }
+        }
 
-//         if (i == 0 || i == 1 || i == 2 || i == 3) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize] &&
-//               display[i + widget.tablesize] ==
-//                   display[i + (widget.tablesize * 2)] &&
-//               display[i + (widget.tablesize * 2)] ==
-//                   display[i + (widget.tablesize * 3)]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
-//         if (i == 0 || i == 3) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize + 1] &&
-//               display[i + widget.tablesize + 1] ==
-//                   display[(widget.tablesize + 1) * 2] &&
-//               display[(widget.tablesize + 1) * 2] ==
-//                   display[(widget.tablesize + 1) * 3]) {
-//             _showWinDialog(display[i]); ////แนวทะแยง
-//           } else if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize - 1] &&
-//               display[i + widget.tablesize - 1] ==
-//                   display[i + (widget.tablesize - 1) * 2] &&
-//               display[i + (widget.tablesize - 1) * 2] ==
-//                   display[i + (widget.tablesize - 1) * 3]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
-//       }
-//       //////////// 5*5
-//       if (this.widget.tablesize == 5) {
-//         if (i == 0 || i == 5 || i == 10 || i == 15 || i == 20) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + 1] &&
-//               display[i + 1] == display[i + 2] &&
-//               display[i + 2] == display[i + 3] &&
-//               display[i + 3] == display[i + 4]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
+        if (i == 0 || i == 1 || i == 2 || i == 3) {
+          if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize] &&
+              display[i + widget.tablesize] ==
+                  display[i + (widget.tablesize * 2)] &&
+              display[i + (widget.tablesize * 2)] ==
+                  display[i + (widget.tablesize * 3)]) {
+            _showWinDialog(display[i]);
+          }
+        }
+        if (i == 0 || i == 3) {
+          if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize + 1] &&
+              display[i + widget.tablesize + 1] ==
+                  display[(widget.tablesize + 1) * 2] &&
+              display[(widget.tablesize + 1) * 2] ==
+                  display[(widget.tablesize + 1) * 3]) {
+            _showWinDialog(display[i]); ////แนวทะแยง
+          } else if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize - 1] &&
+              display[i + widget.tablesize - 1] ==
+                  display[i + (widget.tablesize - 1) * 2] &&
+              display[i + (widget.tablesize - 1) * 2] ==
+                  display[i + (widget.tablesize - 1) * 3]) {
+            _showWinDialog(display[i]);
+          }
+        }
+      }
+      //////////// 5*5
+      if (this.widget.tablesize == 5) {
+        if (i == 0 || i == 5 || i == 10 || i == 15 || i == 20) {
+          if (display[i] != '' &&
+              display[i] == display[i + 1] &&
+              display[i + 1] == display[i + 2] &&
+              display[i + 2] == display[i + 3] &&
+              display[i + 3] == display[i + 4]) {
+            _showWinDialog(display[i]);
+          }
+        }
 
-//         if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize] &&
-//               display[i + widget.tablesize] ==
-//                   display[i + (widget.tablesize * 2)] &&
-//               display[i + (widget.tablesize * 2)] ==
-//                   display[i + (widget.tablesize * 3)] &&
-//               display[i + (widget.tablesize * 3)] ==
-//                   display[i + (widget.tablesize * 4)]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
-//         if (i == 0 || i == 4) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize + 1] &&
-//               display[i + widget.tablesize + 1] ==
-//                   display[(widget.tablesize + 1) * 2] &&
-//               display[(widget.tablesize + 1) * 2] ==
-//                   display[(widget.tablesize + 1) * 3] &&
-//               display[(widget.tablesize + 1) * 3] ==
-//                   display[(widget.tablesize + 1) * 4]) {
-//             _showWinDialog(display[i]); ////แนวทะแยง
-//           } else if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize - 1] &&
-//               display[i + widget.tablesize - 1] ==
-//                   display[i + (widget.tablesize - 1) * 2] &&
-//               display[i + (widget.tablesize - 1) * 2] ==
-//                   display[i + (widget.tablesize - 1) * 3] &&
-//               display[i + (widget.tablesize - 1) * 3] ==
-//                   display[i + (widget.tablesize - 1) * 4]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
-//       }
+        if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4) {
+          if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize] &&
+              display[i + widget.tablesize] ==
+                  display[i + (widget.tablesize * 2)] &&
+              display[i + (widget.tablesize * 2)] ==
+                  display[i + (widget.tablesize * 3)] &&
+              display[i + (widget.tablesize * 3)] ==
+                  display[i + (widget.tablesize * 4)]) {
+            _showWinDialog(display[i]);
+          }
+        }
+        if (i == 0 || i == 4) {
+          if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize + 1] &&
+              display[i + widget.tablesize + 1] ==
+                  display[(widget.tablesize + 1) * 2] &&
+              display[(widget.tablesize + 1) * 2] ==
+                  display[(widget.tablesize + 1) * 3] &&
+              display[(widget.tablesize + 1) * 3] ==
+                  display[(widget.tablesize + 1) * 4]) {
+            _showWinDialog(display[i]); ////แนวทะแยง
+          } else if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize - 1] &&
+              display[i + widget.tablesize - 1] ==
+                  display[i + (widget.tablesize - 1) * 2] &&
+              display[i + (widget.tablesize - 1) * 2] ==
+                  display[i + (widget.tablesize - 1) * 3] &&
+              display[i + (widget.tablesize - 1) * 3] ==
+                  display[i + (widget.tablesize - 1) * 4]) {
+            _showWinDialog(display[i]);
+          }
+        }
+      }
 
-//       //////////// 6*6
-//       if (this.widget.tablesize == 6) {
-//         if (i == 0 || i == 6 || i == 12 || i == 18 || i == 24 || i == 30) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + 1] &&
-//               display[i + 1] == display[i + 2] &&
-//               display[i + 2] == display[i + 3] && ////////แนวตั้ง
-//               display[i + 3] == display[i + 4] &&
-//               display[i + 4] == display[i + 5]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
+      //////////// 6*6
+      if (this.widget.tablesize == 6) {
+        if (i == 0 || i == 6 || i == 12 || i == 18 || i == 24 || i == 30) {
+          if (display[i] != '' &&
+              display[i] == display[i + 1] &&
+              display[i + 1] == display[i + 2] &&
+              display[i + 2] == display[i + 3] && ////////แนวตั้ง
+              display[i + 3] == display[i + 4] &&
+              display[i + 4] == display[i + 5]) {
+            _showWinDialog(display[i]);
+          }
+        }
 
-//         if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize] &&
-//               display[i + widget.tablesize] ==
-//                   display[i + (widget.tablesize * 2)] && /////แนวนอน
-//               display[i + (widget.tablesize * 2)] ==
-//                   display[i + (widget.tablesize * 3)] &&
-//               display[i + (widget.tablesize * 3)] ==
-//                   display[i + (widget.tablesize * 4)] &&
-//               display[i + (widget.tablesize * 4)] ==
-//                   display[i + (widget.tablesize * 5)]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
-//         if (i == 0 || i == 5) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize + 1] &&
-//               display[i + widget.tablesize + 1] ==
-//                   display[(widget.tablesize + 1) * 2] &&
-//               display[(widget.tablesize + 1) * 2] ==
-//                   display[(widget.tablesize + 1) * 3] &&
-//               display[(widget.tablesize + 1) * 3] ==
-//                   display[(widget.tablesize + 1) * 4] &&
-//               display[(widget.tablesize + 1) * 4] ==
-//                   display[(widget.tablesize + 1) * 5]) {
-//             _showWinDialog(display[i]); ////แนวทะแยง
-//           } else if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize - 1] &&
-//               display[i + widget.tablesize - 1] ==
-//                   display[i + (widget.tablesize - 1) * 2] &&
-//               display[i + (widget.tablesize - 1) * 2] ==
-//                   display[i + (widget.tablesize - 1) * 3] &&
-//               display[i + (widget.tablesize - 1) * 3] ==
-//                   display[i + (widget.tablesize - 1) * 4] &&
-//               display[i + (widget.tablesize - 1) * 4] ==
-//                   display[i + (widget.tablesize - 1) * 5]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
-//       }
-//       ////////// 7*7
-//       if (this.widget.tablesize == 7) {
-//         if (i == 0 ||
-//             i == 7 ||
-//             i == 14 ||
-//             i == 21 ||
-//             i == 28 ||
-//             i == 35 ||
-//             i == 42) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + 1] &&
-//               display[i + 1] == display[i + 2] &&
-//               display[i + 2] == display[i + 3] && ////////แนวตั้ง
-//               display[i + 3] == display[i + 4] &&
-//               display[i + 4] == display[i + 5] &&
-//               display[i + 5] == display[i + 6]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
+        if (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5) {
+          if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize] &&
+              display[i + widget.tablesize] ==
+                  display[i + (widget.tablesize * 2)] && /////แนวนอน
+              display[i + (widget.tablesize * 2)] ==
+                  display[i + (widget.tablesize * 3)] &&
+              display[i + (widget.tablesize * 3)] ==
+                  display[i + (widget.tablesize * 4)] &&
+              display[i + (widget.tablesize * 4)] ==
+                  display[i + (widget.tablesize * 5)]) {
+            _showWinDialog(display[i]);
+          }
+        }
+        if (i == 0 || i == 5) {
+          if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize + 1] &&
+              display[i + widget.tablesize + 1] ==
+                  display[(widget.tablesize + 1) * 2] &&
+              display[(widget.tablesize + 1) * 2] ==
+                  display[(widget.tablesize + 1) * 3] &&
+              display[(widget.tablesize + 1) * 3] ==
+                  display[(widget.tablesize + 1) * 4] &&
+              display[(widget.tablesize + 1) * 4] ==
+                  display[(widget.tablesize + 1) * 5]) {
+            _showWinDialog(display[i]); ////แนวทะแยง
+          } else if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize - 1] &&
+              display[i + widget.tablesize - 1] ==
+                  display[i + (widget.tablesize - 1) * 2] &&
+              display[i + (widget.tablesize - 1) * 2] ==
+                  display[i + (widget.tablesize - 1) * 3] &&
+              display[i + (widget.tablesize - 1) * 3] ==
+                  display[i + (widget.tablesize - 1) * 4] &&
+              display[i + (widget.tablesize - 1) * 4] ==
+                  display[i + (widget.tablesize - 1) * 5]) {
+            _showWinDialog(display[i]);
+          }
+        }
+      }
+      ////////// 7*7
+      if (this.widget.tablesize == 7) {
+        if (i == 0 ||
+            i == 7 ||
+            i == 14 ||
+            i == 21 ||
+            i == 28 ||
+            i == 35 ||
+            i == 42) {
+          if (display[i] != '' &&
+              display[i] == display[i + 1] &&
+              display[i + 1] == display[i + 2] &&
+              display[i + 2] == display[i + 3] && ////////แนวตั้ง
+              display[i + 3] == display[i + 4] &&
+              display[i + 4] == display[i + 5] &&
+              display[i + 5] == display[i + 6]) {
+            _showWinDialog(display[i]);
+          }
+        }
 
-//         if (i == 0 ||
-//             i == 1 ||
-//             i == 2 ||
-//             i == 3 ||
-//             i == 4 ||
-//             i == 5 ||
-//             i == 6) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize] &&
-//               display[i + widget.tablesize] ==
-//                   display[i + (widget.tablesize * 2)] && /////แนวนอน
-//               display[i + (widget.tablesize * 2)] ==
-//                   display[i + (widget.tablesize * 3)] &&
-//               display[i + (widget.tablesize * 3)] ==
-//                   display[i + (widget.tablesize * 4)] &&
-//               display[i + (widget.tablesize * 4)] ==
-//                   display[i + (widget.tablesize * 5)] &&
-//               display[i + (widget.tablesize * 5)] ==
-//                   display[i + (widget.tablesize * 6)]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
-//         if (i == 0 || i == 6) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize + 1] &&
-//               display[i + widget.tablesize + 1] ==
-//                   display[(widget.tablesize + 1) * 2] &&
-//               display[(widget.tablesize + 1) * 2] ==
-//                   display[(widget.tablesize + 1) * 3] &&
-//               display[(widget.tablesize + 1) * 3] ==
-//                   display[(widget.tablesize + 1) * 4] &&
-//               display[(widget.tablesize + 1) * 4] ==
-//                   display[(widget.tablesize + 1) * 5] &&
-//               display[(widget.tablesize + 1) * 5] ==
-//                   display[(widget.tablesize + 1) * 6]) {
-//             _showWinDialog(display[i]); ////แนวทะแยง
-//           } else if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize - 1] &&
-//               display[i + widget.tablesize - 1] ==
-//                   display[i + (widget.tablesize - 1) * 2] &&
-//               display[i + (widget.tablesize - 1) * 2] ==
-//                   display[i + (widget.tablesize - 1) * 3] &&
-//               display[i + (widget.tablesize - 1) * 3] ==
-//                   display[i + (widget.tablesize - 1) * 4] &&
-//               display[i + (widget.tablesize - 1) * 4] ==
-//                   display[i + (widget.tablesize - 1) * 5] &&
-//               display[i + (widget.tablesize - 1) * 5] ==
-//                   display[i + (widget.tablesize - 1) * 6]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
-//       }
-//       //////8*8
-//       if (this.widget.tablesize == 8) {
-//         if (i == 0 ||
-//             i == 9 ||
-//             i == 17 ||
-//             i == 25 ||
-//             i == 33 ||
-//             i == 41 ||
-//             i == 49 ||
-//             i == 57) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + 1] &&
-//               display[i + 1] == display[i + 2] &&
-//               display[i + 2] == display[i + 3] && ////////แนวตั้ง
-//               display[i + 3] == display[i + 4] &&
-//               display[i + 4] == display[i + 5] &&
-//               display[i + 5] == display[i + 6] &&
-//               display[i + 6] == display[i + 7]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
+        if (i == 0 ||
+            i == 1 ||
+            i == 2 ||
+            i == 3 ||
+            i == 4 ||
+            i == 5 ||
+            i == 6) {
+          if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize] &&
+              display[i + widget.tablesize] ==
+                  display[i + (widget.tablesize * 2)] && /////แนวนอน
+              display[i + (widget.tablesize * 2)] ==
+                  display[i + (widget.tablesize * 3)] &&
+              display[i + (widget.tablesize * 3)] ==
+                  display[i + (widget.tablesize * 4)] &&
+              display[i + (widget.tablesize * 4)] ==
+                  display[i + (widget.tablesize * 5)] &&
+              display[i + (widget.tablesize * 5)] ==
+                  display[i + (widget.tablesize * 6)]) {
+            _showWinDialog(display[i]);
+          }
+        }
+        if (i == 0 || i == 6) {
+          if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize + 1] &&
+              display[i + widget.tablesize + 1] ==
+                  display[(widget.tablesize + 1) * 2] &&
+              display[(widget.tablesize + 1) * 2] ==
+                  display[(widget.tablesize + 1) * 3] &&
+              display[(widget.tablesize + 1) * 3] ==
+                  display[(widget.tablesize + 1) * 4] &&
+              display[(widget.tablesize + 1) * 4] ==
+                  display[(widget.tablesize + 1) * 5] &&
+              display[(widget.tablesize + 1) * 5] ==
+                  display[(widget.tablesize + 1) * 6]) {
+            _showWinDialog(display[i]); ////แนวทะแยง
+          } else if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize - 1] &&
+              display[i + widget.tablesize - 1] ==
+                  display[i + (widget.tablesize - 1) * 2] &&
+              display[i + (widget.tablesize - 1) * 2] ==
+                  display[i + (widget.tablesize - 1) * 3] &&
+              display[i + (widget.tablesize - 1) * 3] ==
+                  display[i + (widget.tablesize - 1) * 4] &&
+              display[i + (widget.tablesize - 1) * 4] ==
+                  display[i + (widget.tablesize - 1) * 5] &&
+              display[i + (widget.tablesize - 1) * 5] ==
+                  display[i + (widget.tablesize - 1) * 6]) {
+            _showWinDialog(display[i]);
+          }
+        }
+      }
+      //////8*8
+      if (this.widget.tablesize == 8) {
+        if (i == 0 ||
+            i == 9 ||
+            i == 17 ||
+            i == 25 ||
+            i == 33 ||
+            i == 41 ||
+            i == 49 ||
+            i == 57) {
+          if (display[i] != '' &&
+              display[i] == display[i + 1] &&
+              display[i + 1] == display[i + 2] &&
+              display[i + 2] == display[i + 3] && ////////แนวตั้ง
+              display[i + 3] == display[i + 4] &&
+              display[i + 4] == display[i + 5] &&
+              display[i + 5] == display[i + 6] &&
+              display[i + 6] == display[i + 7]) {
+            _showWinDialog(display[i]);
+          }
+        }
 
-//         if (i == 0 ||
-//             i == 1 ||
-//             i == 2 ||
-//             i == 3 ||
-//             i == 4 ||
-//             i == 5 ||
-//             i == 6 ||
-//             i == 7) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize] &&
-//               display[i + widget.tablesize] ==
-//                   display[i + (widget.tablesize * 2)] && /////แนวนอน
-//               display[i + (widget.tablesize * 2)] ==
-//                   display[i + (widget.tablesize * 3)] &&
-//               display[i + (widget.tablesize * 3)] ==
-//                   display[i + (widget.tablesize * 4)] &&
-//               display[i + (widget.tablesize * 4)] ==
-//                   display[i + (widget.tablesize * 5)] &&
-//               display[i + (widget.tablesize * 5)] ==
-//                   display[i + (widget.tablesize * 6)] &&
-//               display[i + (widget.tablesize * 6)] ==
-//                   display[i + (widget.tablesize * 7)]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
-//         if (i == 0 || i == 7) {
-//           if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize + 1] &&
-//               display[i + widget.tablesize + 1] ==
-//                   display[(widget.tablesize + 1) * 2] &&
-//               display[(widget.tablesize + 1) * 2] ==
-//                   display[(widget.tablesize + 1) * 3] &&
-//               display[(widget.tablesize + 1) * 3] ==
-//                   display[(widget.tablesize + 1) * 4] &&
-//               display[(widget.tablesize + 1) * 4] ==
-//                   display[(widget.tablesize + 1) * 5] &&
-//               display[(widget.tablesize + 1) * 5] ==
-//                   display[(widget.tablesize + 1) * 6] &&
-//               display[(widget.tablesize + 1) * 6] ==
-//                   display[(widget.tablesize + 1) * 7]) {
-//             _showWinDialog(display[i]); ////แนวทะแยง
-//           } else if (display[i] != '' &&
-//               display[i] == display[i + widget.tablesize - 1] &&
-//               display[i + widget.tablesize - 1] ==
-//                   display[i + (widget.tablesize - 1) * 2] &&
-//               display[i + (widget.tablesize - 1) * 2] ==
-//                   display[i + (widget.tablesize - 1) * 3] &&
-//               display[i + (widget.tablesize - 1) * 3] ==
-//                   display[i + (widget.tablesize - 1) * 4] &&
-//               display[i + (widget.tablesize - 1) * 4] ==
-//                   display[i + (widget.tablesize - 1) * 5] &&
-//               display[i + (widget.tablesize - 1) * 5] ==
-//                   display[i + (widget.tablesize - 1) * 6] &&
-//               display[i + (widget.tablesize - 1) * 6] ==
-//                   display[i + (widget.tablesize - 1) * 7]) {
-//             _showWinDialog(display[i]);
-//           }
-//         }
-//       }
+        if (i == 0 ||
+            i == 1 ||
+            i == 2 ||
+            i == 3 ||
+            i == 4 ||
+            i == 5 ||
+            i == 6 ||
+            i == 7) {
+          if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize] &&
+              display[i + widget.tablesize] ==
+                  display[i + (widget.tablesize * 2)] && /////แนวนอน
+              display[i + (widget.tablesize * 2)] ==
+                  display[i + (widget.tablesize * 3)] &&
+              display[i + (widget.tablesize * 3)] ==
+                  display[i + (widget.tablesize * 4)] &&
+              display[i + (widget.tablesize * 4)] ==
+                  display[i + (widget.tablesize * 5)] &&
+              display[i + (widget.tablesize * 5)] ==
+                  display[i + (widget.tablesize * 6)] &&
+              display[i + (widget.tablesize * 6)] ==
+                  display[i + (widget.tablesize * 7)]) {
+            _showWinDialog(display[i]);
+          }
+        }
+        if (i == 0 || i == 7) {
+          if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize + 1] &&
+              display[i + widget.tablesize + 1] ==
+                  display[(widget.tablesize + 1) * 2] &&
+              display[(widget.tablesize + 1) * 2] ==
+                  display[(widget.tablesize + 1) * 3] &&
+              display[(widget.tablesize + 1) * 3] ==
+                  display[(widget.tablesize + 1) * 4] &&
+              display[(widget.tablesize + 1) * 4] ==
+                  display[(widget.tablesize + 1) * 5] &&
+              display[(widget.tablesize + 1) * 5] ==
+                  display[(widget.tablesize + 1) * 6] &&
+              display[(widget.tablesize + 1) * 6] ==
+                  display[(widget.tablesize + 1) * 7]) {
+            _showWinDialog(display[i]); ////แนวทะแยง
+          } else if (display[i] != '' &&
+              display[i] == display[i + widget.tablesize - 1] &&
+              display[i + widget.tablesize - 1] ==
+                  display[i + (widget.tablesize - 1) * 2] &&
+              display[i + (widget.tablesize - 1) * 2] ==
+                  display[i + (widget.tablesize - 1) * 3] &&
+              display[i + (widget.tablesize - 1) * 3] ==
+                  display[i + (widget.tablesize - 1) * 4] &&
+              display[i + (widget.tablesize - 1) * 4] ==
+                  display[i + (widget.tablesize - 1) * 5] &&
+              display[i + (widget.tablesize - 1) * 5] ==
+                  display[i + (widget.tablesize - 1) * 6] &&
+              display[i + (widget.tablesize - 1) * 6] ==
+                  display[i + (widget.tablesize - 1) * 7]) {
+            _showWinDialog(display[i]);
+          }
+        }
+      }
     } /////////////loop
     ////////////Draw
     if (filledBoxes == display.length) {
@@ -511,10 +531,17 @@ class _HomeState extends State<Home> {
         context: context,
         builder: (BuildContext) {
           return AlertDialog(
-            title: Text('DRAW'),
+            title: Center(
+                child: Text(
+              'DRAW',
+              style: omyFont.copyWith(color: Colors.black),
+            )),
             actions: [
               FlatButton(
-                child: Text('Play Again!'),
+                child: Text(
+                  'Play Again!',
+                  style: omyFont.copyWith(color: Colors.blue, fontSize: 10),
+                ),
                 onPressed: () {
                   DBService service = new DBService();
                   HistoryModel history = new HistoryModel();
@@ -522,8 +549,8 @@ class _HomeState extends State<Home> {
                   history.result = tie.toString();
                   var data = history.historyMap();
                   service.insertData(data);
-                  print("message" + this.tie);
-                  print("winner is" + tie.toString());
+                  // print("message" + this.tie);
+                  // print("winner is" + tie.toString());
                   _clearBoard();
                   Navigator.pop(context);
                 },
@@ -539,10 +566,17 @@ class _HomeState extends State<Home> {
         context: context,
         builder: (BuildContext) {
           return AlertDialog(
-            title: Text('WINNER IS  ' + winner),
+            title: Center(
+                child: Text(
+              'WINNER!   ' + winner,
+              style: omyFont.copyWith(color: Colors.black),
+            )),
             actions: [
               FlatButton(
-                child: Text('Play Again!'),
+                child: Text(
+                  'Play Again!',
+                  style: omyFont.copyWith(color: Colors.blue, fontSize: 10),
+                ),
                 onPressed: () {
                   DBService service = new DBService();
                   HistoryModel history = new HistoryModel();
@@ -550,8 +584,8 @@ class _HomeState extends State<Home> {
                   history.result = winner.toString();
                   var data = history.historyMap();
                   service.insertData(data);
-                  print("message" + this.win);
-                  print("winner is" + winner.toString());
+                  // print("message" + this.win);
+                  // print("winner is" + winner.toString());
                   _clearBoard();
                   Navigator.pop(context);
                 },
