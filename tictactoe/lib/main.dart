@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                Home(numsize: int.parse((tablesize.text)))),
+                                Home(tablesize: int.parse((tablesize.text)))),
                       );
                     } else if (tablesize.text == "") {
                       _InputDialog();
