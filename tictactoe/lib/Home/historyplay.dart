@@ -81,7 +81,7 @@ class _historyPlayState extends State<historyPlay> {
                     children: [
                       Text(
                         historyList[index].list,
-                        style: FontWhite,
+                        style: FontWhite.copyWith(color: Colors.green),
                       ),
                     ],
                   ),
