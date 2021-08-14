@@ -42,8 +42,9 @@ class _HomeState extends State<Home> {
 
   int oScore = 0;
   int xScore = 0;
-  int oCount = 0;
+  int CountWin = 0;
   int xCount = 0;
+
   int filledBoxes = 0;
   String win = 'WINNER';
   String tie = 'DRAW';
@@ -202,12 +203,14 @@ class _HomeState extends State<Home> {
               display[i] == display[i + widget.tablesize] &&
               display[i + widget.tablesize] ==
                   display[i + (widget.tablesize * 2)]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           } else if (i == 0) {
             if (display[i] != '' &&
                 display[i] == display[i + widget.tablesize + 1] &&
                 display[i + widget.tablesize + 1] ==
                     display[i + (widget.tablesize + 1) * 2]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           } else if (i == 2) {
@@ -215,6 +218,7 @@ class _HomeState extends State<Home> {
                 display[i] == display[i + widget.tablesize - 1] &&
                 display[i + widget.tablesize - 1] ==
                     display[i + (widget.tablesize - 1) * 2]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           }
@@ -223,6 +227,7 @@ class _HomeState extends State<Home> {
           if (display[i] != '' &&
               display[i] == display[i + 1] &&
               display[i + 1] == display[i + 2]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           }
         }
@@ -236,6 +241,7 @@ class _HomeState extends State<Home> {
                   display[i + (widget.tablesize * 2)] &&
               display[i + (widget.tablesize * 2)] ==
                   display[i + (widget.tablesize * 3)]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           } else if (i == 0) {
             if (display[i] != '' &&
@@ -244,6 +250,7 @@ class _HomeState extends State<Home> {
                     display[i + (widget.tablesize + 1) * 2] &&
                 display[i + (widget.tablesize + 1) * 2] ==
                     display[i + (widget.tablesize + 1) * 3]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           } else if (i == 3) {
@@ -253,6 +260,7 @@ class _HomeState extends State<Home> {
                     display[i + (widget.tablesize - 1) * 2] &&
                 display[i + (widget.tablesize - 1) * 2] ==
                     display[i + (widget.tablesize - 1) * 3]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           }
@@ -262,6 +270,7 @@ class _HomeState extends State<Home> {
               display[i] == display[i + 1] &&
               display[i + 1] == display[i + 2] &&
               display[i + 2] == display[i + 3]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           }
         }
@@ -277,6 +286,7 @@ class _HomeState extends State<Home> {
                   display[i + (widget.tablesize * 3)] &&
               display[i + (widget.tablesize * 3)] ==
                   display[i + (widget.tablesize * 4)]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           } else if (i == 0) {
             if (display[i] != '' &&
@@ -287,6 +297,7 @@ class _HomeState extends State<Home> {
                     display[i + (widget.tablesize + 1) * 3] &&
                 display[i + (widget.tablesize + 1) * 3] ==
                     display[i + (widget.tablesize + 1) * 4]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           } else if (i == 4) {
@@ -298,6 +309,7 @@ class _HomeState extends State<Home> {
                     display[i + (widget.tablesize - 1) * 3] &&
                 display[i + (widget.tablesize - 1) * 3] ==
                     display[i + (widget.tablesize - 1) * 4]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           }
@@ -308,6 +320,7 @@ class _HomeState extends State<Home> {
               display[i + 1] == display[i + 2] &&
               display[i + 2] == display[i + 3] &&
               display[i + 3] == display[i + 4]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           }
         }
@@ -325,6 +338,7 @@ class _HomeState extends State<Home> {
                   display[i + (widget.tablesize * 4)] &&
               display[i + (widget.tablesize * 4)] ==
                   display[i + (widget.tablesize * 5)]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           } else if (i == 0) {
             if (display[i] != '' &&
@@ -337,6 +351,7 @@ class _HomeState extends State<Home> {
                     display[i + (widget.tablesize + 1) * 4] &&
                 display[i + (widget.tablesize + 1) * 4] ==
                     display[i + (widget.tablesize + 1) * 5]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           } else if (i == 5) {
@@ -350,6 +365,7 @@ class _HomeState extends State<Home> {
                     display[i + (widget.tablesize - 1) * 4] &&
                 display[i + (widget.tablesize - 1) * 4] ==
                     display[i + (widget.tablesize - 1) * 5]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           }
@@ -361,6 +377,7 @@ class _HomeState extends State<Home> {
               display[i + 2] == display[i + 3] &&
               display[i + 3] == display[i + 4] &&
               display[i + 4] == display[i + 5]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           }
         }
@@ -386,6 +403,7 @@ class _HomeState extends State<Home> {
                   display[i + (widget.tablesize * 5)] &&
               display[i + (widget.tablesize * 5)] ==
                   display[i + (widget.tablesize * 6)]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           } else if (i == 0) {
             if (display[i] != '' &&
@@ -400,6 +418,7 @@ class _HomeState extends State<Home> {
                     display[i + (widget.tablesize + 1) * 5] &&
                 display[i + (widget.tablesize + 1) * 5] ==
                     display[i + (widget.tablesize + 1) * 6]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           } else if (i == 6) {
@@ -415,6 +434,7 @@ class _HomeState extends State<Home> {
                     display[i + (widget.tablesize - 1) * 5] &&
                 display[i + (widget.tablesize - 1) * 5] ==
                     display[i + (widget.tablesize - 1) * 6]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           }
@@ -433,6 +453,7 @@ class _HomeState extends State<Home> {
               display[i + 3] == display[i + 4] &&
               display[i + 4] == display[i + 5] &&
               display[i + 5] == display[i + 6]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           }
         }
@@ -461,6 +482,7 @@ class _HomeState extends State<Home> {
                   display[i + (widget.tablesize * 6)] &&
               display[i + (widget.tablesize * 6)] ==
                   display[i + (widget.tablesize * 7)]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           } else if (i == 0) {
             if (display[i] != '' &&
@@ -477,6 +499,7 @@ class _HomeState extends State<Home> {
                     display[i + (widget.tablesize + 1) * 6] &&
                 display[i + (widget.tablesize + 1) * 6] ==
                     display[i + (widget.tablesize + 1) * 7]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           } else if (i == 7) {
@@ -494,6 +517,7 @@ class _HomeState extends State<Home> {
                     display[i + (widget.tablesize - 1) * 6] &&
                 display[i + (widget.tablesize - 1) * 6] ==
                     display[i + (widget.tablesize - 1) * 7]) {
+              CountWin = 1;
               _showWinDialog(display[i]);
             }
           }
@@ -514,14 +538,20 @@ class _HomeState extends State<Home> {
               display[i + 4] == display[i + 5] &&
               display[i + 5] == display[i + 6] &&
               display[i + 6] == display[i + 7]) {
+            CountWin = 1;
             _showWinDialog(display[i]);
           }
         }
+      } else {
+        CountWin = 0;
       }
     } /////////////loop
     ////////////Draw
     if (filledBoxes == display.length) {
-      _showDrawDialog();
+      //print("DRAW COUNT " + CountWin.toString());
+      if (CountWin == 0) {
+        _showDrawDialog();
+      }
     }
   }
 
