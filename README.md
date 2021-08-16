@@ -7,7 +7,7 @@
 
 ## วิธี run โปรแกรม
 1. เข้า command prompt ที่ path ของโปรแกรม
-2. ใช้คำสั่ง flutter run เพื่อ setup และ run โปรแกรม
+2. ใช้คำสั่ง flutter run เพื่อ install และ run โปรแกรม
 
 
 ## วิธีออกแบบโปรแกรมและ algorithm
