@@ -5,6 +5,7 @@ import 'package:tictactoe/Home/historyplay.dart';
 import 'package:tictactoe/database/db_service.dart';
 import 'package:tictactoe/model/history_Model.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:tictactoe/Home/size_helper.dart';
 
 class Home extends StatefulWidget {
   int tablesize;
@@ -35,10 +36,10 @@ class _HomeState extends State<Home> {
 
   static var omyFont = GoogleFonts.pressStart2P(
       textStyle:
-          TextStyle(color: Colors.orange, letterSpacing: 3, fontSize: 12));
+          TextStyle(color: Colors.orange, letterSpacing: 1, fontSize: 12));
   static var myFontWhite = GoogleFonts.pressStart2P(
       textStyle:
-          TextStyle(color: Colors.white, letterSpacing: 3, fontSize: 12));
+          TextStyle(color: Colors.white, letterSpacing: 1, fontSize: 12));
 
   int oScore = 0;
   int xScore = 0;
@@ -50,6 +51,10 @@ class _HomeState extends State<Home> {
   String tie = 'DRAW';
   @override
   Widget build(BuildContext context) {
+    double w = displayWidth(context) * 0.9;
+    double h = displayHeight(context) -
+        MediaQuery.of(context).padding.top -
+        kToolbarHeight;
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
@@ -69,7 +74,7 @@ class _HomeState extends State<Home> {
       body: Column(
         children: [
           SizedBox(
-            height: 15.0,
+            height: h * 0.02,
           ),
           Container(
             child: Row(
@@ -81,13 +86,14 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Player O',
-                          style: omyFont.copyWith(color: Colors.black)),
+                          style: omyFont.copyWith(
+                              color: Colors.black, fontSize: w * 0.04)),
                       SizedBox(
-                        height: 10,
+                        height: h * 0.02,
                       ),
                       Text(oScore.toString(),
                           style: omyFont.copyWith(
-                              color: Colors.black, fontSize: 15)),
+                              color: Colors.black, fontSize: w * 0.05)),
                     ],
                   ),
                 ),
@@ -97,13 +103,14 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Player X',
-                          style: omyFont.copyWith(color: Colors.black)),
+                          style: omyFont.copyWith(
+                              color: Colors.black, fontSize: w * 0.04)),
                       SizedBox(
-                        height: 10,
+                        height: h * 0.02,
                       ),
                       Text(xScore.toString(),
                           style: omyFont.copyWith(
-                              color: Colors.black, fontSize: 15)),
+                              color: Colors.black, fontSize: w * 0.05)),
                     ],
                   ),
                 ),
@@ -134,7 +141,7 @@ class _HomeState extends State<Home> {
                           display[index],
                           //index.toString(),
                           style: omyFont.copyWith(
-                              color: Colors.black, fontSize: 30), //40
+                              color: Colors.black, fontSize: w * 0.03), //40
                         ),
                       ),
                     ),
@@ -146,7 +153,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       floatingActionButton: SizedBox.fromSize(
-        size: Size.square(80),
+        size: Size.square(h * 0.13),
         child: FloatingActionButton(
           onPressed: () {
             Navigator.push(context,
@@ -154,7 +161,7 @@ class _HomeState extends State<Home> {
           },
           child: Icon(
             CupertinoIcons.doc_text_search,
-            size: 40.0,
+            size: h * 0.09,
             color: Colors.white,
           ),
           backgroundColor: Colors.green[400],
@@ -168,7 +175,7 @@ class _HomeState extends State<Home> {
         elevation: 25.0,
         clipBehavior: Clip.antiAlias,
         child: Container(
-          height: 70.0,
+          height: h * 0.09,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(80.0),

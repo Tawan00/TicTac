@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:tictactoe/Home/historyplay.dart';
+import 'package:tictactoe/Home/size_helper.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,6 +45,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double w = displayWidth(context) * 0.9;
+    double h = displayHeight(context) -
+        MediaQuery.of(context).padding.top -
+        kToolbarHeight;
     return Scaffold(
       backgroundColor: Colors.teal[50],
       body: ListView(
@@ -53,11 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 120.0),
+                  padding: EdgeInsets.only(top: 100.0),
                   child: Container(
                     child: Text(
                       'GAME',
-                      style: ogFont.copyWith(fontSize: 25.0),
+                      style: ogFont.copyWith(fontSize: w * 0.08),
                     ),
                   ),
                 ),
@@ -66,24 +71,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Container(
                     child: Text(
                       'TIC TAC TOE',
-                      style: FontWhite.copyWith(fontSize: 25.0),
+                      style: FontWhite.copyWith(fontSize: w * 0.08),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 50.0),
+                  padding: const EdgeInsets.only(top: 30),
                   child: Container(
                     child: Image.asset('lib/images/logo.png'),
-                    height: 150.0,
-                    width: 150.0,
+                    height: h * 0.3,
+                    width: w * 0.7,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 50.0, bottom: 20),
+                  padding: const EdgeInsets.only(top: 30, bottom: 20),
                   child: Container(
                     child: Text(
                       'TABLE SIZE',
-                      style: FontWhite.copyWith(fontSize: 15.0),
+                      style: FontWhite.copyWith(fontSize: w * 0.06),
                     ),
                   ),
                 ),
@@ -93,18 +98,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.0, right: 16.0),
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 1),
+                        border:
+                            Border.all(color: Colors.black, width: w * 0.01),
                         borderRadius: BorderRadius.circular(15)),
                     child: DropdownButton(
                       hint: Text('SELECT SIZE TABLE',
                           style: FontWhite.copyWith(
-                              color: Colors.black, fontSize: 7.0)),
+                              color: Colors.black, fontSize: w * 0.02)),
                       dropdownColor: Colors.white,
                       icon: Icon(
                         Icons.arrow_drop_down,
                         color: Colors.black,
                       ),
-                      iconSize: 36,
+                      iconSize: w * 0.08,
                       isExpanded: true,
                       underline: SizedBox(),
                       style: omyFont.copyWith(color: Colors.black),
@@ -130,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: SizedBox.fromSize(
-        size: Size.square(80),
+        size: Size.square(h * 0.13),
         child: FloatingActionButton(
           onPressed: () {
             if (tablesize.text != "") {
@@ -146,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
           },
           child: Icon(
             CupertinoIcons.game_controller,
-            size: 40.0,
+            size: h * 0.09,
             color: Colors.white,
           ),
           backgroundColor: Colors.green[400],
@@ -160,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
         elevation: 25.0,
         clipBehavior: Clip.antiAlias,
         child: Container(
-          height: 70.0,
+          height: h * 0.09,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(80.0),

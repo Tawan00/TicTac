@@ -4,6 +4,7 @@ import 'package:tictactoe/database/db_service.dart';
 import 'package:tictactoe/model/history_Model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:tictactoe/Home/size_helper.dart';
 
 class historyPlay extends StatefulWidget {
   @override
@@ -38,6 +39,10 @@ class _historyPlayState extends State<historyPlay> {
 
   @override
   Widget build(BuildContext context) {
+    double w = displayWidth(context) * 0.9;
+    double h = displayHeight(context) -
+        MediaQuery.of(context).padding.top -
+        kToolbarHeight;
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
@@ -72,7 +77,7 @@ class _historyPlayState extends State<historyPlay> {
                     children: [
                       Text(
                         "MATCH " + historyList[index].id.toString(),
-                        style: FontWhite,
+                        style: FontWhite.copyWith(fontSize: w * 0.04),
                       ),
                     ],
                   ),
@@ -81,7 +86,8 @@ class _historyPlayState extends State<historyPlay> {
                     children: [
                       Text(
                         historyList[index].list,
-                        style: FontWhite.copyWith(color: Colors.green),
+                        style: FontWhite.copyWith(
+                            color: Colors.green, fontSize: w * 0.04),
                       ),
                     ],
                   ),
@@ -91,7 +97,7 @@ class _historyPlayState extends State<historyPlay> {
                       Text(
                         historyList[index].result,
                         style: FontWhite.copyWith(
-                            color: Colors.orange, fontSize: 13),
+                            color: Colors.orange, fontSize: w * 0.04),
                       ),
                     ],
                   ),
@@ -100,7 +106,7 @@ class _historyPlayState extends State<historyPlay> {
             }),
       ),
       floatingActionButton: SizedBox.fromSize(
-        size: Size.square(80),
+        size: Size.square(h * 0.13),
         child: FloatingActionButton(
           onPressed: () async {
             var service = DBService();
@@ -113,7 +119,7 @@ class _historyPlayState extends State<historyPlay> {
           },
           child: Icon(
             CupertinoIcons.trash,
-            size: 40.0,
+            size: h * 0.09,
             color: Colors.white,
           ),
           backgroundColor: Colors.redAccent,
@@ -127,7 +133,7 @@ class _historyPlayState extends State<historyPlay> {
         elevation: 25.0,
         clipBehavior: Clip.antiAlias,
         child: Container(
-          height: 70.0,
+          height: h * 0.09,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(80.0),
