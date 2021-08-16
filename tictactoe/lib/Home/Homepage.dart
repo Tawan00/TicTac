@@ -73,9 +73,6 @@ class _HomeState extends State<Home> {
       ),
       body: Column(
         children: [
-          SizedBox(
-            height: h * 0.02,
-          ),
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -141,7 +138,7 @@ class _HomeState extends State<Home> {
                           display[index],
                           //index.toString(),
                           style: omyFont.copyWith(
-                              color: Colors.black, fontSize: w * 0.03), //40
+                              color: Colors.black, fontSize: w * 0.08), //40
                         ),
                       ),
                     ),
