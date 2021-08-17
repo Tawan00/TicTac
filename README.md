@@ -1,5 +1,5 @@
 ## วิธีติดตั้งแอพจากไฟล์ .apk
-[ดาวโหลดโหลดแอป](https://drive.google.com/file/d/1sKmgd_Ww-w2UKanVpk3z0C6F9sV4U9lx/view?usp=sharing)
+[ดาวโหลดโหลดแอป](https://drive.google.com/file/d/1-4rZczT3UeZ9YYgyQTyqBdW_xxq45H1R/view?usp=sharing)
 1. เข้าเมนู การตั้งค่า > ความปลอดภัย แล้วกดเปิด ไม่รู้จักที่มา
 2. ดาวน์โหลดไฟล์ apk มาลงเครื่อง แล้วกดเปิดไฟล์ได้จากแถบแจ้งเตือน หรือในแอพ File Manager
 3. กด ติดตั้ง แล้วกดเปิดใช้งานแอพได้เลย
