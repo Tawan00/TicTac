@@ -19,6 +19,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        primaryTextTheme: GoogleFonts.pressStart2PTextTheme(
+          Theme.of(context)
+              .primaryTextTheme, // ถ้าไม่ใส่ มันจะตั้งค่า Default ทุกอย่างตาม ThemeData.light().textTheme
+        ),
+        textTheme: GoogleFonts.pressStart2PTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       home: MyHomePage(),
     );
